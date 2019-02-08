@@ -4,14 +4,17 @@
 
 	<div class="card">
 		<div class="card-body">
-		<h1 class="card-title">Rejestracja</h1>
-			<form method="POST" enctype="multipart/form-data">
+		<h1 class="card-title">Zaaktualizuj dane swojego konta</h1>
+		<a href="{%url 'contact' %}">Edytuj dane kontaktowe</a>
+			<form method="POST">
 				{% csrf_token %}
 				<fieldset class="form-group">
-					{{ form|crispy }}
+					{{contact}}
+					{{ u_form|crispy }}
 				</fieldset>
 				<div class="form-group">
-					<button class="btn btn-outline-info" type="submit">Zarejestruj</button>
+					<button class="btn btn-outline-info" type="submit">Zaaktualizuj</button>
+					
 				</div>
 			</form>
 		</div>

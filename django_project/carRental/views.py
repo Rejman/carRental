@@ -24,3 +24,4 @@ def users(request):
     }
     
     return render(request, 'carRental/users.html', context)
+
