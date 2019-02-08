@@ -4,14 +4,14 @@
 
 	<div class="card">
 		<div class="card-body">
-		<h1 class="card-title">Rejeestracja</h1>
+		<h1 class="card-title">Logowanie</h1>
 			<form method="POST">
 				{% csrf_token %}
 				<fieldset class="form-group">
 					{{ form|crispy }}
 				</fieldset>
 				<div class="form-group">
-					<button class="btn btn-outline-info" type="submit">Zarejestruj</button>
+					<button class="btn btn-outline-info" type="submit">Zaloguj</button>
 				</div>
 			</form>
 		</div>

@@ -14,7 +14,7 @@ def register(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Utworzono użytkownika {username}!')
-            return redirect('carRental-home')
+            return redirect('login')
     else:
         form = UserRegisterForm()
 
