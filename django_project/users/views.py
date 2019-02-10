@@ -7,7 +7,7 @@ from .models import Contact
 
 def register(request):
     
-    title = 'register'
+    title = 'rejestracja'
     form = None
     
     if request.method == 'POST':
@@ -31,7 +31,7 @@ def register(request):
 
 @login_required
 def profile(request):
-    title = 'profile'
+    title = 'edytuj profil'
 
     if request.method == 'POST':
         
@@ -40,7 +40,7 @@ def profile(request):
             u_form.save()
             messages.success(request, f'Zaaktualizowano dane!')
             
-            return redirect('carRental-home')
+            return redirect('profile')
     else:
                     
         u_form = UserUpdateForm(instance=request.user)
@@ -64,8 +64,7 @@ def contact(request):
         contact = Contact(user=request.user, street="", code="", city="", phone="")
         contact.save()
 
-
-    title= 'contact'
+    title= 'edytuj profil'
 
     if request.method == 'POST':
         
@@ -74,17 +73,13 @@ def contact(request):
             c_form.save()
             messages.success(request, f'Zaaktualizowano dane!')
             
-            return redirect('carRental-home')
+            return redirect('contact')
     else:
-                    
         c_form = ContactUpdateForm(instance=request.user.contact)
-        
-
     
     context={
         "title": title,
         'c_form': c_form,
 
     }
-
     return render(request, 'users/contact.html', context)

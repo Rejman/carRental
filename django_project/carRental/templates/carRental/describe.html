@@ -1,0 +1,38 @@
+{% extends 'carRental/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+	<div class="card">
+		<div class="card-body">
+		<h1 class="card-title">{{carModel.mark}} {{carModel.model}}</h1>
+		<p>
+		{{carModel.desc}}
+		</p>
+		
+		 <table class="table">
+		  <thead>
+			<tr>
+			  <th scope="col">Marka</th>
+			  <th scope="col">Model</th>
+			  <th scope="col">typ</th>
+			  <th scope="col">ilość drzwi</th>
+			  <th scope="col">cena za dobę</th>
+			</tr>
+		  </thead>
+		  <tbody>
+				<tr>
+				  <td>{{carModel.mark}}</td>
+				  <td>{{carModel.model}}</td>
+				  <td>{{carModel.sort}}</td>
+				  <td>{{carModel.doors}}</td>
+				  <th scope ="row">{{carModel.price}} zł</th>
+
+				</tr>
+		  </tbody>
+		</table>
+			
+		</div>
+	</div>
+	
+			
+{% endblock content%}

@@ -5,6 +5,7 @@
 	<div class="card">
 		<div class="card-body">
 		<h1 class="card-title">Logowanie</h1>
+		<a href= "{% url 'register' %}">Utwórz nowe konto</a>
 			<form method="POST">
 				{% csrf_token %}
 				<fieldset class="form-group">
