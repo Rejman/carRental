@@ -1,0 +1,24 @@
+{% extends 'carRental/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+	<div class="card">
+		<div class="card-body">
+		<h1 class="card-title">Zaaktualizuj dane swojego konta</h1>
+		<a href="{%url 'contact' %}">Edytuj dane kontaktowe</a>
+			<form method="POST">
+				{% csrf_token %}
+				<fieldset class="form-group">
+					{{contact}}
+					{{ u_form|crispy }}
+				</fieldset>
+				<div class="form-group">
+					<button class="btn btn-outline-info" type="submit">Zaaktualizuj</button>
+					
+				</div>
+			</form>
+		</div>
+	</div>
+	
+			
+{% endblock content%}
