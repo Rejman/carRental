@@ -1,8 +1,10 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-
-from .models import CarModel
+from .forms import RentalForm
+from .models import CarModel, Car, Rental
+from django.contrib import messages
+import datetime
 
 app_name = "carRental"
 
@@ -32,11 +34,51 @@ def home(request, mark='all'):
 def desc(request, car_model_id):
 
     carModel = CarModel.objects.get(pk=car_model_id)
+    cars = Car.objects.filter(carModel=car_model_id)
     
     context = {
+        'cars': cars,
         'carModel':carModel,
         'app_name':app_name,
         'title': carModel.model,
     }
     
     return render(request, 'carRental/describe.html', context)
+
+@login_required
+def rental(request, car_id):
+
+
+    title= 'wypożycz'
+    car = Car.objects.get(pk=car_id)
+    rental = Rental(user=request.user, car=car, dateOfRental=datetime.datetime.now(), dateOfReturn=datetime.datetime.now())
+    rental.save()
+
+
+    if request.method == 'POST':
+        form = RentalForm(request.POST, instance=request.user)
+        if car.available==False:
+            messages.error(request, f'samochód nie jest dostępny')
+            return redirect('carRental-home')
+
+        if form.is_valid():
+            form.save()
+            car.available=False
+            car.save()
+            
+            messages.success(request, f'Zarejestrowano wypożyczenie')
+            return redirect('carRental-home')
+        
+    else:
+        form = RentalForm(instance=request.user)
+
+    
+    context={
+        "title": title,
+        'form': form,
+
+    }
+    return render(request, 'carRental/rental.html', context)
+
+
+    

@@ -24,16 +24,16 @@ class Car(models.Model):
     available = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.plate
+        return self.plate +'-'+str(self.available)
 
 class Rental(models.Model):
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    car = models.OneToOneField(Car, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
     dateOfRental = models.DateField()
     dateOfReturn = models.DateField()
-    cost = models.DecimalField(max_digits=6, decimal_places=2)
+    #cost = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self):
-        return self.user +' '+str(self.car)+' '+ self.cost
+        return str(self.dateOfRental)
     

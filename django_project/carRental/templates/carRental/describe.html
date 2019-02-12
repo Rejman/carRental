@@ -33,6 +33,41 @@
 			
 		</div>
 	</div>
+	{% if user.is_authenticated %}
+		<div class="card">
+			<div class="card-body">
+			<h1 class="card-title">lista samochodów</h1>
+			
+			 <table class="table table-striped">
+			  <thead>
+				<tr>
+				  <th scope="col">rejestracja</th>
+				  <th scope="col">kolor</th>
+				  <th scope="col">dostępność</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				{% for car in cars %}
+					<tr>
+					  <td>{{car.plate}}</td>
+					  <td>{{car.color}}</td>
+					  {% if car.available == False %}
+						<td>niedostpęny</td>
+					  {% else %}
+					    <td>
+							<a href={% url 'rental' car.pk %} >wypożycz</a>
+						</td>
+					  {% endif %}
+					</tr>
+				{%endfor%}
+	
+
+			  </tbody>
+			</table>
+				
+			</div>
+		</div>
+	{% endif %}
 	
 			
 {% endblock content%}

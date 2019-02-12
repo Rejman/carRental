@@ -2,23 +2,22 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-	<div class="card">
+	
+<div class="card">
 		<div class="card-body">
-		<h1 class="card-title">Zaaktualizuj dane swojego konta</h1>
-		<a href="{%url 'contact' %}">Edytuj dane kontaktowe</a>
+		<h1 class="card-title">Podaj datę wpyożyczenia</h1>
 			<form method="POST">
 				{% csrf_token %}
 				<fieldset class="form-group">
-					{{contact}}
-					{{ u_form|crispy }}
+					{{ form|crispy }}
 				</fieldset>
 				<div class="form-group">
-					<button class="btn btn-outline-info" type="submit">Zaaktualizuj</button>
-					
+					<button class="btn btn-outline-info" type="submit">Zarezerwuj</button>
 				</div>
 			</form>
 		</div>
 	</div>
+	
 	
 			
 {% endblock content%}
