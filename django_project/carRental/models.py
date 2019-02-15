@@ -36,4 +36,11 @@ class Rental(models.Model):
 
     def __str__(self):
         return str(self.dateOfRental)
+
+    def set_dateOfRental(self, date):
+        self.dateOfRental = date
+
+    def set_dateOfReturn(self, date):
+        self.dateOfReturn = date
+    
     

@@ -8,13 +8,15 @@ import datetime
 
 app_name = "carRental"
 
-carModels = CarModel.objects.all()
-marks = set()
 
-for car in carModels:
-    marks.add(car.mark)
 
 def home(request, mark='all'):
+
+    carModels = CarModel.objects.all()
+    marks = set()
+
+    for car in carModels:
+        marks.add(car.mark)
     
     if mark != 'all':
         carModels = CarModel.objects.filter(mark=mark)
@@ -45,24 +47,29 @@ def desc(request, car_model_id):
     
     return render(request, 'carRental/describe.html', context)
 
-@login_required
-def rental(request, car_id):
+
+
+#@login_required
+@login_required(login_url='/login/')
+
+def rental(request, car_id=0):
 
 
     title= 'wypożycz'
     car = Car.objects.get(pk=car_id)
     rental = Rental(user=request.user, car=car, dateOfRental=datetime.datetime.now(), dateOfReturn=datetime.datetime.now())
-    rental.save()
-
+    form = RentalForm()
 
     if request.method == 'POST':
-        form = RentalForm(request.POST, instance=request.user)
+        form = RentalForm(request.POST)
         if car.available==False:
             messages.error(request, f'samochód nie jest dostępny')
             return redirect('carRental-home')
 
         if form.is_valid():
-            form.save()
+            rental.set_dateOfRental(form.cleaned_data['dateOfRental'])
+            rental.set_dateOfReturn(form.cleaned_data['dateOfReturn'])
+            rental.save()
             car.available=False
             car.save()
             
@@ -70,9 +77,8 @@ def rental(request, car_id):
             return redirect('carRental-home')
         
     else:
-        form = RentalForm(instance=request.user)
-
-    
+        form = RentalForm()
+        
     context={
         "title": title,
         'form': form,

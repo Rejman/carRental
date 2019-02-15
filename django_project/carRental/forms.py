@@ -1,17 +1,17 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Rental
+import datetime
 
 
+class RentalForm(forms.Form):
 
-class RentalForm(forms.ModelForm):
+    dateOfRental = forms.DateField(initial=datetime.datetime.now())
+    dateOfReturn = forms.DateField(initial=datetime.datetime.now())
 
-    class Meta:
-        model = Rental
-        fields = ['dateOfRental', 'dateOfReturn']
 
-        #fields = ("user", "title")
-        labels = {
-            "dateOfRental": "data wypożyczenia (format : 01.10.2020)",
-            "dateOfReturn": "data zwrotu",
-        }
+    labels = {
+        "dateOfRental": "data wypożyczenia (format : 01.10.2020)",
+        "dateOfReturn": "data zwrotu",
+    }
+
+
