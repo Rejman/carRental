@@ -25,13 +25,13 @@ SECRET_KEY = '4@@4!xw(%&mfut(qln1_89cf!+(a(dgu!()e9c!#0b^=9%o!!l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'crispy_forms',
+    #'crispy_forms',
     'users.apps.UsersConfig',
     'carRental.apps.CarrentalConfig',
     'django.contrib.admin',
@@ -78,8 +78,11 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432,
     }
 }
 

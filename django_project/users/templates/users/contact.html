@@ -1,5 +1,5 @@
 {% extends 'carRental/base.html' %}
-{% load crispy_forms_tags %}
+
 {% block content %}
 
 	<div class="card">
@@ -9,7 +9,7 @@
 			<form method="POST">
 				{% csrf_token %}
 				<fieldset class="form-group">
-					{{ c_form|crispy }}
+					{{ c_form }}
 				</fieldset>
 				<div class="form-group">
 					<button class="btn btn-outline-info" type="submit">Zaaktualizuj</button>
